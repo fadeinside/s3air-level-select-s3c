@@ -1,0 +1,22 @@
+{
+	"S3Complete_LevelSelectBG_S3": { "File": "dataselect_bg.bmp" },
+	"S3Complete_LevelSelectBG_S&K": { "File": "levelselect_s&k.bmp" },
+	
+	"S3Complete_LevelSelectIcon_Sonic3": { "File": "levelselect_icons.bmp", "Rect": "0,0,16,16"},
+	"S3Complete_LevelSelectIcon_Sonic2": { "File": "levelselect_icons.bmp", "Rect": "0,16,16,16"},
+	"S3Complete_LevelSelectIcon_Sonic1": { "File": "levelselect_icons.bmp", "Rect": "0,32,16,16"},
+	"S3Complete_LevelSelectIcon_Sonic1Acc": { "File": "levelselect_icons.bmp", "Rect": "0,48,16,16"},
+	"S3Complete_LevelSelectIcon_Sonic2Acc": { "File": "levelselect_icons.bmp", "Rect": "0,64,16,16"},
+	"S3Complete_LevelSelectIcon_Sonic2Mobile": { "File": "levelselect_icons.bmp", "Rect": "0,80,16,16"},
+	"S3Complete_LevelSelectIcon_SonicCD": { "File": "levelselect_icons.bmp", "Rect": "0,96,16,16"},
+	"S3Complete_LevelSelectIcon_Tails": { "File": "levelselect_icons.bmp", "Rect": "16,0,16,16"},
+	"S3Complete_LevelSelectIcon_TailsOG": { "File": "levelselect_icons.bmp", "Rect": "16,64,16,16"},
+	"S3Complete_LevelSelectIcon_Knuckles": { "File": "levelselect_icons.bmp", "Rect": "32,0,16,16"},
+	"S3Complete_LevelSelectIcon_KnucklesS2": { "File": "levelselect_icons.bmp", "Rect": "32,64,16,16"},
+	"S3Complete_LevelSelectIcon_Invalid": { "File": "levelselect_icons.bmp", "Rect": "16,16,16,16"},
+	"S3Complete_LevelSelectIcon_BlueKnuckles": { "File": "levelselect_icons.bmp", "Rect": "32,16,16,16"},
+	
+	"S3Complete_LevelSelectIcon_ManiaSonic": { "File": "levelselect_icons_mania.png", "Rect": "0,0,16,16"},
+	"S3Complete_LevelSelectIcon_ManiaTails": { "File": "levelselect_icons_mania.png", "Rect": "16,0,16,16"},
+	"S3Complete_LevelSelectIcon_ManiaKnuckles": { "File": "levelselect_icons_mania.png", "Rect": "32,0,16,16"},
+}

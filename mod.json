@@ -1,0 +1,111 @@
+{
+	"Metadata":
+	{
+		"Name": "Sonic 3 Complete Sound Test",
+		"Author": "mrgrassman14",
+		"Description": "Recreates the Sound Test menu from Sonic 3 Complete, with extra options to change the background, player icon sprites, Zone names and order.",
+		"URL": "https://gamebanana.com/mods/361615",
+		"ModVersion": "1.11",
+		"GameVersion": "21.05.08.0"
+	},
+	"Settings":
+	{
+		"Events":
+		[
+			{
+				"InternalName": "S3Complete_SoundTest_Order_int",
+				"DisplayName": "Zone Order",
+				"Variable": "S3Complete_SoundTest_Order",	// This must be the name of a global variable in the scripts (not a define!)
+				"DefaultValue": "0",
+				"Category": "Menu Appearance",
+				"Options":
+				{
+					"0": "As Released",
+					"1": "Original Design",
+				}
+			},
+			{
+				"InternalName": "S3Complete_SoundTest_MVZ_int",
+				"DisplayName": "Mushroom Hill Name",
+				"Variable": "S3Complete_SoundTest_MVZ",	// This must be the name of a global variable in the scripts (not a define!)
+				"DefaultValue": "1",
+				"Category": "Menu Appearance",
+				"Options":
+				{
+					"0": "Mushroom Hill",
+					"1": "Mushroom Valley",
+					"2": "Mushroom Forest",
+				}
+			},
+			{
+				"InternalName": "S3Complete_SoundTest_DDZ_int",
+				"DisplayName": "Doomsday Name",
+				"Variable": "S3Complete_SoundTest_DDZ",	// This must be the name of a global variable in the scripts (not a define!)
+				"DefaultValue": "0",
+				"Category": "Menu Appearance",
+				"Options":
+				{
+					"0": "Doomsday",
+					"1": "The Doomsday",
+				}
+			},
+			{
+				"InternalName": "S3Complete_SoundTest_SpriteStyle_int",
+				"DisplayName": "Player Sprite Style",
+				"Variable": "S3Complete_SoundTest_SpriteStyle",	// This must be the name of a global variable in the scripts (not a define!)
+				"DefaultValue": "2",
+				"Category": "Menu Appearance",
+				"Options":
+				{
+					"0": "Sonic 1",
+					"1": "Sonic 2",
+					"2": "Sonic 3",
+					"3": "Sonic 1 (Original)",
+					"4": "Sonic 1 (Yamaguchi)",
+					"5": "Sonic 2 (Original)",
+					"6": "Sonic 2 (Mobile)",
+					"7": "Sonic CD",
+					"8": "Sonic CD (Yamaguchi)",
+					"9": "Sonic Mania",
+				}
+			},
+			{
+				"InternalName": "S3Complete_SoundTest_BG_int",
+				"DisplayName": "Background Style",
+				"Variable": "S3Complete_SoundTest_BG",	// This must be the name of a global variable in the scripts (not a define!)
+				"DefaultValue": "0",
+				"Category": "Menu Appearance",
+				"Options":
+				{
+					"0": "Sonic 3 Complete",
+					"1": "Sonic 3 Part One",
+					"2": "Sonic & Knuckles",
+				}
+			},
+			{
+				"InternalName": "S3Complete_SoundTest_EndingCheat_int",
+				"DisplayName": "Extra Levels Selection",
+				"Variable": "S3Complete_SoundTest_EndingCheat",	// This must be the name of a global variable in the scripts (not a define!)
+				"DefaultValue": "0",
+				"Category": "Miscellaneous",
+				"Options":
+				{
+					"0": "Off",
+					"4": "On",
+				}
+			},
+			{
+				"InternalName": "S3Complete_SoundTest_CheatMessage_int",
+				"DisplayName": "Cheat Activation Messages",
+				"Variable": "S3Complete_SoundTest_CheatMessage",	// This must be the name of a global variable in the scripts (not a define!)
+				"DefaultValue": "1",
+				"Category": "Miscellaneous",
+				"Options":
+				{
+					"0": "Off",
+					"1": "On",
+				}
+			}
+		]
+	}
+}

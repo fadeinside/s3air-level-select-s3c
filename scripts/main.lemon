@@ -1,0 +1,2308 @@
+global u8 S3Complete_SoundTest_MVZ
+global u8 S3Complete_SoundTest_DDZ
+global u8 S3Complete_SoundTest_Order
+global u8 S3Complete_SoundTest_SpriteStyle
+global u8 S3Complete_SoundTest_BG
+global u8 S3Complete_SoundTest_CheatMessage
+global u8 S3Complete_SoundTest_ChaosCheat
+global u8 S3Complete_SoundTest_SuperCheat
+global u8 S3Complete_SoundTest_EndingCheat
+global u8 S3Complete_SoundTest_LivesCheat
+global u8 S3Complete_SoundTest_ContinuesCheat
+global u8 S3Complete_SoundTest_ExtraSelect
+
+//NEW Globals for Extra Slot Chars
+global u8 EXSlot1
+global u8 EXSlot2
+global u8 EXSlot3
+
+global string EXS1_LS_icon
+global string EXS2_LS_icon
+global string EXS3_LS_icon
+
+//-------------------------------------------------------//
+// Level Select Main Function                            //
+//-------------------------------------------------------//
+
+//# address-hook(0x007a74) end(0x007d20)
+//# translated(0x007d64) end(0x007d6a)
+function void LevelSelect()
+{
+	changeMusicTempo(1)
+	Game.setUnderwaterAudioEffect(0x00)
+	S3Complete_SoundTest_ExtraSelect = 1
+	//Load player icons
+	if (levelselect.characters != 0)
+	{
+		if (levelselect.characters == EXSlot3)
+		{
+			Renderer.drawCustomSprite(stringformat("level_select_S3C_%s", EXS3_LS_icon), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
+		}
+		else if (levelselect.characters == EXSlot2)
+		{
+			Renderer.drawCustomSprite(stringformat("level_select_S3C_%s", EXS2_LS_icon), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
+		}
+		else if (levelselect.characters == EXSlot1)
+		{
+			Renderer.drawCustomSprite(stringformat("level_select_S3C_%s", EXS1_LS_icon), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
+		}
+	}
+	if (levelselect.characters <= 1)
+	{
+		if (S3Complete_SoundTest_SpriteStyle == 0)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Sonic1", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+			System.loadExternalRawData("s3complete_s1lselect", 0x0a8abc)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 1)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Sonic2", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+			System.loadExternalRawData("s3complete_s2lselect", 0x0a8abc)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 2)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Sonic3", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+			System.loadExternalRawData("s3complete_s3lselect", 0x0a8abc)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 3 || S3Complete_SoundTest_SpriteStyle == 4)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Sonic1Acc", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+			if (S3Complete_SoundTest_SpriteStyle == 3)
+			{
+				System.loadExternalRawData("s3complete_s1acclselect", 0x0a8abc)
+			}
+			else
+			{
+				System.loadExternalRawData("s3complete_yamalselect", 0x0a8abc)
+			}
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 5)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Sonic2Acc", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+			System.loadExternalRawData("s3complete_s2acclselect", 0x0a8abc)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 6)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Sonic2Mobile", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+			System.loadExternalRawData("s3complete_s2acclselect", 0x0a8abc)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 7 || S3Complete_SoundTest_SpriteStyle == 8)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_SonicCD", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+			if (S3Complete_SoundTest_SpriteStyle == 7)
+			{
+				System.loadExternalRawData("s3complete_s1acclselect", 0x0a8abc)
+			}
+			else
+			{
+				System.loadExternalRawData("s3complete_yamalselect", 0x0a8abc)
+			}
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 9)
+		{
+			System.loadExternalRawData("s3complete_s1acclselect", 0x0a8abc)
+		}
+	}
+	if (levelselect.characters == 2)
+	{
+		if (S3Complete_SoundTest_SpriteStyle < 3)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Tails", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle < 9 && S3Complete_SoundTest_SpriteStyle >= 3)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_TailsOG", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+	}
+	if (levelselect.characters == 3 || levelselect.characters == 4)
+	{
+		if (S3Complete_SoundTest_SpriteStyle < 3)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Knuckles", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle < 9 && S3Complete_SoundTest_SpriteStyle >= 3)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_KnucklesS2", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+	}
+	if (levelselect.characters == 0 || levelselect.characters == 4)
+	{
+		if (S3Complete_SoundTest_SpriteStyle < 3)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Tails", getScreenExtend() + 270, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle < 9 && S3Complete_SoundTest_SpriteStyle >= 3)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_TailsOG", getScreenExtend() + 270, 115, 0x00, 0, 0x2000)
+		}
+	}
+	if (levelselect.characters > 4)
+	{
+		//NEW If extra slots are detected, load their icons
+		u64 key = 0
+		if (levelselect.characters == EXSlot3)
+		{
+			key = stringformat("level_select_S3C_%s", EXS3_LS_icon)
+			Renderer.drawCustomSprite((Renderer.hasCustomSprite(key) ? key : "S3Complete_LevelSelectIcon_Invalid"), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
+		}
+		else if (levelselect.characters == EXSlot2)
+		{
+			key = stringformat("level_select_S3C_%s", EXS2_LS_icon)
+			Renderer.drawCustomSprite((Renderer.hasCustomSprite(key) ? key : "S3Complete_LevelSelectIcon_Invalid"), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
+		}
+		else if (levelselect.characters == EXSlot1)
+		{
+			key = stringformat("level_select_S3C_%s", EXS1_LS_icon)
+			Renderer.drawCustomSprite((Renderer.hasCustomSprite(key) ? key : "S3Complete_LevelSelectIcon_Invalid"), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
+		}
+		else
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Invalid", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+	}
+	
+	if (S3Complete_SoundTest_BG < 2)
+	{
+		//Draw S3 Data Select BG
+		Renderer.drawCustomSprite("S3Complete_LevelSelectBG_S3", getScreenExtend() - 40, 0, 0x10, 0, 0x1000)
+		if (S3Complete_SoundTest_BG == 1)
+		{
+			//Load palette used for Part One
+			System.loadExternalRawData("s3complete_lselect_palette_part1", 0x0a8a9c)
+		}
+	}
+	else
+	{
+		//Load BG and palette for Sonic & Knuckles
+		System.loadExternalRawData("s3complete_lselect_palette_s&k", 0x0a8a9c)
+		Renderer.drawCustomSprite("S3Complete_LevelSelectBG_S&K", getScreenExtend() - 40, 0, 0x10, 0, 0x1000)
+	}
+	global.zone_act = 0
+	FadeOutScreenBlocking()
+
+#if !STANDALONE
+	set_status_register(0x2700)
+#endif
+
+	LevelSelect.init()
+
+	Menu.FadeInAfterInit()
+
+	// Perform main update now
+	bool running = true
+	while (running)
+	{
+		global.frame_state = 0x16
+
+		// End point for a single frame
+		//  -> Right here we place the entry point for the standalone version
+		waitForNextFrame()
+	@EntryPoint:
+
+		running = LevelSelect.innerUpdate()
+	}
+}
+
+
+
+//-------------------------------------------------------//
+// Level Select Initialization                           //
+//-------------------------------------------------------//
+
+function void LevelSelect.init()
+{
+	// Disable active display for now
+	VDP.Config.setActiveDisplay(false)
+
+	fn0011ca()
+
+	// Configure VDP registers
+	VDP.Config.enableHInt(false)
+	VDP.Config.setNameTableBasePlaneA(0xbffe)
+	VDP.Config.setNameTableBasePlaneB(0xe000)
+	VDP.Config.setBackdropColor(0)
+	VDP.Config.setRenderingModeConfiguration(false)
+	VDP.Config.setPlayfieldSizeInPixels(512, 256)
+	VDP.Config.setVerticalScrolling(false, 0)	// Horizontal scrolling mode without scroll mask
+
+	zeroMemory(0xffffac00, 0x400)
+	zeroMemory(0xffffb000, 0x2000)
+
+	u16[0xfffffb00] = 0
+	u32[0xfffffbfc] = 0xfffffb00
+	Nemesis.loadDataToVRAM(0x0ca5e0, 0x0200)
+
+	Enigma.decompress(0x0cab54, 0xffff0000, 0x6000)
+
+	zeroMemory(0xffff0000, 0x460 * 2)
+
+	A3 = 0xffff0000
+	A1 = 0x0080e6
+	A5 = 0x0080c4
+	D0 = 0
+	D1.u16 = 0x10
+
+	while (D1.s16 >= 0)
+	{
+		D3.u16 = u16[(A5+=2)-2]
+		A2 = A3 + D3.s16
+		D2 = u8[(A1+=1)-1]
+		D3.u16 = D2.u16
+
+		while (D2.s16 >= 0)
+		{
+			u16[(A2+=2)-2] = u8[(A1+=1)-1]
+			--D2.s16
+		}
+
+		D2.u16 = 0x0d - D3.u16
+		while (D2.s16 >= 0)
+		{
+			u16[(A2+=2)-2] = 0
+			--D2.s16
+		}
+
+		u16[A2] = 0x11
+		A2 = A2 + 0x50
+		u16[A2] = 0x12
+		--D1.s16
+	}
+
+	//0x1e = A
+	//0x1f = B
+	//0x20 = C
+
+	u16[A2] = 0 
+	A2 = A2 - 0x50
+	u16[A2] = 0x1a
+	u16[0xffff018a] = 0x13
+	u16[0xffff01da] = 0x14
+	
+	
+
+	//Mushroom
+	u16[0xffff05f6] = 0x2a
+	u16[0xffff05f8] = 0x32
+	u16[0xffff05fa] = 0x30
+	u16[0xffff05fc] = 0x25
+	u16[0xffff05fe] = 0x2f
+	u16[0xffff0600] = 0x2c
+	u16[0xffff0602] = 0x2c
+	u16[0xffff0604] = 0x2a
+	u16[0xffff0606] = 0x00
+
+	if (S3Complete_SoundTest_Order == 0)
+	{
+		if (S3Complete_SoundTest_MVZ == 1)
+		{
+			//Valley
+			u16[0xffff0608] = 0x33
+			u16[0xffff060a] = 0x1e
+			u16[0xffff060c] = 0x29
+			u16[0xffff060e] = 0x29
+			u16[0xffff0610] = 0x22
+			u16[0xffff0612] = 0x36
+		}
+		else if (S3Complete_SoundTest_MVZ == 2)
+		{
+			//Forest
+			u16[0xffff0608] = 0x23
+			u16[0xffff060a] = 0x2c
+			u16[0xffff060c] = 0x2f
+			u16[0xffff060e] = 0x22
+			u16[0xffff0610] = 0x30
+			u16[0xffff0612] = 0x31
+		}
+		else
+		{
+			//Hill
+			u16[0xffff0608] = 0x25
+			u16[0xffff060a] = 0x26
+			u16[0xffff060c] = 0x29
+			u16[0xffff060e] = 0x29
+			u16[0xffff0610] = 0x00
+		}	
+	}
+	else
+	{
+		//Redraw the names for original order
+		//Flying Battery
+		u16[0xffff0416] = 0x23
+		u16[0xffff0418] = 0x29
+		u16[0xffff041a] = 0x36
+		u16[0xffff041c] = 0x26
+		u16[0xffff041e] = 0x2b
+		u16[0xffff0420] = 0x24
+		u16[0xffff0422] = 0x00
+		u16[0xffff0424] = 0x1f
+		u16[0xffff0426] = 0x1e
+		u16[0xffff0428] = 0x31
+		u16[0xffff042a] = 0x31
+		u16[0xffff042c] = 0x22
+		u16[0xffff042e] = 0x2f
+		u16[0xffff0430] = 0x36
+		
+		//IceCap
+		u16[0xffff0506] = 0x26
+		u16[0xffff0508] = 0x20
+		u16[0xffff050a] = 0x22
+		u16[0xffff050c] = 0x20
+		u16[0xffff050e] = 0x1e
+		u16[0xffff0510] = 0x2d
+		u16[0xffff0512] = 0x00
+		u16[0xffff0514] = 0x00
+		u16[0xffff0516] = 0x00
+		u16[0xffff0518] = 0x00
+		u16[0xffff051a] = 0x00
+		
+		//Launch Base
+		u16[0xffff05f6] = 0x29
+		u16[0xffff05f8] = 0x1e
+		u16[0xffff05fa] = 0x32
+		u16[0xffff05fc] = 0x2b
+		u16[0xffff05fe] = 0x20
+		u16[0xffff0600] = 0x25
+		u16[0xffff0602] = 0x00
+		u16[0xffff0604] = 0x1f
+		u16[0xffff0606] = 0x1e
+		u16[0xffff0608] = 0x30
+		u16[0xffff060a] = 0x22
+		u16[0xffff060c] = 0x00
+		u16[0xffff060e] = 0x00
+		
+		//Mushroom
+		u16[0xffff06e6] = 0x2a
+		u16[0xffff06e8] = 0x32
+		u16[0xffff06ea] = 0x30
+		u16[0xffff06ec] = 0x25
+		u16[0xffff06ee] = 0x2f
+		u16[0xffff06f0] = 0x2c
+		u16[0xffff06f2] = 0x2c
+		u16[0xffff06f4] = 0x2a
+		u16[0xffff06f6] = 0x00
+		
+		if (S3Complete_SoundTest_MVZ == 1)
+		{
+			//Valley
+			u16[0xffff06f8] = 0x33
+			u16[0xffff06fa] = 0x1e
+			u16[0xffff06fc] = 0x29
+			u16[0xffff06fe] = 0x29
+			u16[0xffff0700] = 0x22
+			u16[0xffff0702] = 0x36
+		}
+		else if (S3Complete_SoundTest_MVZ == 2)
+		{
+			//Forest
+			u16[0xffff06f8] = 0x23
+			u16[0xffff06fa] = 0x2c
+			u16[0xffff06fc] = 0x2f
+			u16[0xffff06fe] = 0x22
+			u16[0xffff0700] = 0x30
+			u16[0xffff0702] = 0x31
+		}
+		else
+		{
+			//Hill
+			u16[0xffff06f8] = 0x25
+			u16[0xffff06fa] = 0x26
+			u16[0xffff06fc] = 0x29
+			u16[0xffff06fe] = 0x29
+			u16[0xffff0700] = 0x00
+		}	
+	}
+	//Move Zone Numbers
+	//Angel Island
+	u16[0xffff0074] = 0x00
+	u16[0xffff0076] = 0x11
+	u16[0xffff00c4] = 0x00
+	u16[0xffff00c6] = 0x12
+	
+	//Hydrocity
+	u16[0xffff0164] = 0x00
+	u16[0xffff0166] = 0x11
+	u16[0xffff01b4] = 0x00
+	u16[0xffff01b6] = 0x12
+	
+	//Marble Garden
+	u16[0xffff0254] = 0x00
+	u16[0xffff0256] = 0x11
+	u16[0xffff02a4] = 0x00
+	u16[0xffff02a6] = 0x12
+	
+	//Carnival Night
+	u16[0xffff0344] = 0x00
+	u16[0xffff0346] = 0x11
+	u16[0xffff0394] = 0x00
+	u16[0xffff0396] = 0x12
+	
+	u16[0xffff0434] = 0x00
+	u16[0xffff0436] = 0x11
+	u16[0xffff0484] = 0x00
+	u16[0xffff0486] = 0x12
+	
+	u16[0xffff0524] = 0x00
+	u16[0xffff0526] = 0x11
+	u16[0xffff0574] = 0x00
+	u16[0xffff0576] = 0x12
+	
+	//Are we having fun yet?
+	u16[0xffff0614] = 0x00
+	u16[0xffff0616] = 0x11
+	u16[0xffff0664] = 0x00
+	u16[0xffff0666] = 0x12
+	
+	u16[0xffff0704] = 0x00
+	u16[0xffff0706] = 0x11
+	u16[0xffff0754] = 0x00
+	u16[0xffff0756] = 0x12
+	
+	u16[0xffff07f4] = 0x00
+	u16[0xffff07f6] = 0x11
+	u16[0xffff0844] = 0x00
+	u16[0xffff0846] = 0x12
+	
+	//Lava Reef
+	u16[0xffff009a] = 0x00
+	u16[0xffff009c] = 0x11
+	u16[0xffff00ea] = 0x00
+	u16[0xffff00ec] = 0x12
+	//X
+	u16[0xffff013c] = 0x35
+	
+	//Hidden Palace
+	u16[0xffff018a] = 0x00
+	u16[0xffff01da] = 0x00
+	
+	//Sky Sanctuary (A and B)
+	u16[0xffff027a] = 0x00
+	u16[0xffff027c] = 0x1e
+	u16[0xffff02ca] = 0x00
+	u16[0xffff02cc] = 0x1f
+	
+	//Death Egg
+	u16[0xffff036a] = 0x00
+	u16[0xffff036c] = 0x11
+	u16[0xffff03ba] = 0x00
+	u16[0xffff03bc] = 0x12
+	u16[0xffff040a] = 0x00
+	u16[0xffff040c] = 0x35
+	
+	//The Doomsday
+	u16[0xffff045a] = 0x00
+	u16[0xffff045c] = 0x00
+	u16[0xffff04aa] = 0x00
+	u16[0xffff04ac] = 0x00
+	
+	//Bonus
+	u16[0xffff054a] = 0x00
+	u16[0xffff059a] = 0x00
+	u16[0xffff054c] = 0x00
+	u16[0xffff059a] = 0x00
+	u16[0xffff059c] = 0x24
+	u16[0xffff05ec] = 0x2a
+	u16[0xffff063a] = 0x00
+	u16[0xffff063c] = 0x30
+	u16[0xffff068a] = 0x00
+	
+	//Special Stage
+	u16[0xffff06dc] = 0x1e
+	u16[0xffff072c] = 0x1f
+	u16[0xffff077c] = 0x30
+	
+	//Sound Test
+	u16[0xffff0814] = 0x43
+	u16[0xffff0816] = 0x10
+	u16[0xffff081c] = 0x44
+	
+	//Zone Names
+	//Hidden Palace
+	u16[0xffff016c] = 0x25
+	u16[0xffff016e] = 0x26
+	u16[0xffff0170] = 0x21
+	u16[0xffff0172] = 0x21
+	u16[0xffff0174] = 0x22
+	u16[0xffff0176] = 0x2b
+	u16[0xffff0178] = 0x00
+	u16[0xffff017a] = 0x2d
+	u16[0xffff017c] = 0x1e
+	u16[0xffff017e] = 0x29
+	u16[0xffff0180] = 0x1e
+	u16[0xffff0182] = 0x20
+	u16[0xffff0184] = 0x22
+	
+	//Egg
+	u16[0xffff0356] = 0x00
+	u16[0xffff0358] = 0x22
+	u16[0xffff035a] = 0x24
+	u16[0xffff035c] = 0x24
+	
+	//Doomsday
+	if (S3Complete_SoundTest_DDZ == 0)
+	{
+		u16[0xffff043c] = 0x21
+		u16[0xffff043e] = 0x2c
+		u16[0xffff0440] = 0x2c
+		u16[0xffff0442] = 0x2a
+		u16[0xffff0444] = 0x30
+		u16[0xffff0446] = 0x21
+		u16[0xffff0448] = 0x1e
+		u16[0xffff044a] = 0x36
+		u16[0xffff044c] = 0x00
+		u16[0xffff044e] = 0x00
+		u16[0xffff0450] = 0x00
+		u16[0xffff0452] = 0x00
+	}
+	
+	//Bonus
+	u16[0xffff052c] = 0x00
+	u16[0xffff052e] = 0x00
+	u16[0xffff0530] = 0x00
+	u16[0xffff0532] = 0x00
+	u16[0xffff0534] = 0x00
+	
+	u16[0xffff057c] = 0x1f
+	u16[0xffff057e] = 0x2c
+	u16[0xffff0580] = 0x2b
+	u16[0xffff0582] = 0x32
+	u16[0xffff0584] = 0x30
+	
+	//Special Stage
+	u16[0xffff061c] = 0x00
+	u16[0xffff061e] = 0x00
+	u16[0xffff0620] = 0x00
+	u16[0xffff0622] = 0x00
+	u16[0xffff0624] = 0x00
+	u16[0xffff0626] = 0x00
+	u16[0xffff0628] = 0x00
+	u16[0xffff062a] = 0x00
+	u16[0xffff062c] = 0x00
+	u16[0xffff062e] = 0x00
+	u16[0xffff0630] = 0x00
+	u16[0xffff0632] = 0x00
+	u16[0xffff0634] = 0x00
+	
+	u16[0xffff06bc] = 0x30
+	u16[0xffff06be] = 0x2d
+	u16[0xffff06c0] = 0x22
+	u16[0xffff06c2] = 0x20
+	u16[0xffff06c4] = 0x26
+	u16[0xffff06c6] = 0x1e
+	u16[0xffff06c8] = 0x29
+	u16[0xffff06cc] = 0x30
+	u16[0xffff06ce] = 0x31
+	u16[0xffff06d0] = 0x1e
+	u16[0xffff06d2] = 0x24
+	u16[0xffff06d4] = 0x22
+	
+	if (S3Complete_SoundTest_EndingCheat == 4)
+	{
+		//Draw selection
+		u16[0xffff075c] = 0x43
+		u16[0xffff0760] = 0x22
+		u16[0xffff0762] = 0x2a
+		u16[0xffff0764] = 0x22
+		u16[0xffff0766] = 0x2f
+		u16[0xffff0768] = 0x1e
+		u16[0xffff076a] = 0x29
+		u16[0xffff076c] = 0x21
+		
+		u16[0xffff0770] = 0x30
+		u16[0xffff0772] = 0x25
+		u16[0xffff0774] = 0x2f
+		u16[0xffff0776] = 0x26
+		u16[0xffff0778] = 0x2b
+		u16[0xffff077a] = 0x22
+		u16[0xffff077c] = 0x44
+	}
+	
+	//Sound Test
+	u16[0xffff070c] = 0x00
+	u16[0xffff070e] = 0x00
+	u16[0xffff0710] = 0x00
+	u16[0xffff0712] = 0x00
+	u16[0xffff0714] = 0x00
+	u16[0xffff0716] = 0x00
+	u16[0xffff0718] = 0x00
+	u16[0xffff071a] = 0x00
+	u16[0xffff071c] = 0x00
+	u16[0xffff071e] = 0x00
+	u16[0xffff0720] = 0x00
+	u16[0xffff0722] = 0x00
+	u16[0xffff0724] = 0x00
+	u16[0xffff0726] = 0x00
+	u16[0xffff072a] = 0x00
+	
+	u16[0xffff07fc] = 0x30
+	u16[0xffff07fe] = 0x2c
+	u16[0xffff0800] = 0x32
+	u16[0xffff0802] = 0x2b
+	u16[0xffff0804] = 0x21
+	u16[0xffff0808] = 0x31
+	u16[0xffff080a] = 0x22
+	u16[0xffff080c] = 0x30
+	u16[0xffff080e] = 0x31
+
+	copyRectToVRAM(0xffff0000, 0xc000 - 2, 0x28, 0x1c) 
+
+	D3 = 0
+	fn007f62()
+
+	global.characters = CHARS_SONIC_AND_TAILS
+	u16[0xffffff02] = 0
+	global.level_started = 0
+	u16[0xfffff7f0] = 0  
+
+	A2 = 0x0081b0
+	LevelTilesAnim.Default()
+
+	Level.loadNonfadingPaletteData(0x04)
+
+	//copyMemory(0xfffffcc0, 0xfffffc40, 0x20)
+	zeroMemory(0xfffffc40, 0x20)
+
+	playMusic(0x2f)
+
+	global.demo_countdown = 1799	// 30 seconds (minus one frame)
+	competition_mode.active = 0
+	
+
+		
+	camera.position.x = 0
+	camera.position.y = 0
+	global.active_saveslot = 0
+	level.giantrings_clear = 0
+	checkpoint.number = 0
+	global.stage_type = 0
+	bluespheres.minigame_mode = 0
+
+	u16[0xffffffe4] = 0
+	u16[0xffffffe6] = 0 
+	global.frame_state = 0x16
+
+#if STANDALONE
+	// Corrections for widescreen
+	for (u16 base = 0xe000; base < 0xee00; base += 0x80)
+	{
+		for (u16 x = 0; x < 0x30; x += 2)
+		{
+			setVRAM(base + x + 0x50, getVRAM(base + x + 0x08))
+		}
+	}
+
+	// Foreground scroll offset
+	u16[0xffffe000] = max(s16(getScreenExtend()) - 6, 0)
+
+	// Write sound test digits (they are missing otherwise)
+	//VDP.setupVRAMWrite(0xcb46)
+	VDP.setupVRAMWrite(0xccc6) 
+	LevelSelect.writeHexDigit(levelselect.soundtest >> 4,   0)
+	LevelSelect.writeHexDigit(levelselect.soundtest & 0x0f, 0)
+
+#endif
+
+	waitForNextFrame()
+
+	// Re-enable active display again
+	VDP.Config.setActiveDisplay(true)
+}
+
+
+
+//-------------------------------------------------------//
+// Level Select Update                                   //
+//-------------------------------------------------------//
+function bool LevelSelect.innerUpdate()
+{
+#if STANDALONE
+	// Corrections for widescreen
+	//  -> Actually no need to do this each frame, but I like to load level select save states and want it to be corrected after initialization
+	for (u16 base = 0xe000; base < 0xee00; base += 0x80)
+	{
+		for (u16 x = 0; x < 0x30; x += 2)
+		{
+			setVRAM(base + x + 0x50, getVRAM(base + x + 0x08))
+		}
+	}
+
+	// Foreground scroll offset
+	u16[0xffffe000] = max(s16(getScreenExtend()) - 6, 0)
+#endif
+
+	if (S3Complete_SoundTest_BG < 2)
+	{
+		Renderer.drawCustomSprite("S3Complete_LevelSelectBG_S3", getScreenExtend() - 40, 0, 0x10, 0, 0x1000)
+	}
+	else
+	{
+		Renderer.drawCustomSprite("S3Complete_LevelSelectBG_S&K", getScreenExtend() - 40, 0, 0x10, 0, 0x1000)
+	}
+	
+	//Load player icons
+	if (levelselect.characters <= 1)
+	{
+		if (S3Complete_SoundTest_SpriteStyle == 0)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Sonic1", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+			System.loadExternalRawData("s3complete_s1lselect", 0x0a8ac0)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 1)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Sonic2", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+			System.loadExternalRawData("s3complete_s2lselect", 0x0a8ac0)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 2)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Sonic3", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 3 || S3Complete_SoundTest_SpriteStyle == 4)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Sonic1Acc", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 5)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Sonic2Acc", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 6)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Sonic2Mobile", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 7 || S3Complete_SoundTest_SpriteStyle == 8)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_SonicCD", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 9)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_ManiaSonic", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+	}
+	if (levelselect.characters == 2)
+	{
+		if (S3Complete_SoundTest_SpriteStyle <= 2)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Tails", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle < 9 && S3Complete_SoundTest_SpriteStyle >= 3)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_TailsOG", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 9)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_ManiaTails", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+	}
+	if (levelselect.characters == 3 || levelselect.characters == 4)
+	{
+		if (S3Complete_SoundTest_SpriteStyle <= 2)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Knuckles", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle < 9 && S3Complete_SoundTest_SpriteStyle >= 3)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_KnucklesS2", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 9)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_ManiaKnuckles", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		}
+	}
+	if (levelselect.characters == 0 || levelselect.characters == 4)
+	{
+		if (S3Complete_SoundTest_SpriteStyle <= 2)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Tails", getScreenExtend() + 270, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle < 9 && S3Complete_SoundTest_SpriteStyle >= 3)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_TailsOG", getScreenExtend() + 270, 115, 0x00, 0, 0x2000)
+		}
+		if (S3Complete_SoundTest_SpriteStyle == 9)
+		{
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_ManiaTails", getScreenExtend() + 270, 115, 0x00, 0, 0x2000)
+		}
+	}
+	if (levelselect.characters > 4)
+	{
+		//NEW If extra slots are detected, load their icons
+		u64 key = 0
+		if (levelselect.characters == EXSlot3)
+		{
+			key = stringformat("level_select_S3C_%s", EXS3_LS_icon)
+			Renderer.drawCustomSprite((Renderer.hasCustomSprite(key) ? key : "S3Complete_LevelSelectIcon_Invalid"), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
+		}
+		else if (levelselect.characters == EXSlot2)
+		{
+			key = stringformat("level_select_S3C_%s", EXS2_LS_icon)
+			Renderer.drawCustomSprite((Renderer.hasCustomSprite(key) ? key : "S3Complete_LevelSelectIcon_Invalid"), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
+		}
+		else if (levelselect.characters == EXSlot1)
+		{
+			key = stringformat("level_select_S3C_%s", EXS1_LS_icon)
+			Renderer.drawCustomSprite((Renderer.hasCustomSprite(key) ? key : "S3Complete_LevelSelectIcon_Invalid"), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
+		}
+		else
+			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Invalid", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+	}
+	RenderSprites()
+
+	//Color Update
+#if !STANDALONE
+	set_status_register(0x2700)
+#endif
+	D3 = 0
+	fn007f62()
+	fn007e64()
+	D3.u16 = 0x6000
+	fn007f62()
+#if !STANDALONE
+	set_status_register(0x2300) 
+#endif
+
+	A2 = 0x0081b0
+	LevelTilesAnim.Default()
+
+	if ((control.pad1.pressed | control.pad2.pressed) & CONTROL_START)
+	{
+		if (global.lock_on_state != 0)
+		{
+			if (levelselect.characters < CHARS_KNUCKLES_ALONE)
+				levelselect.characters = CHARS_SONIC_ALONE
+		}
+
+		global.characters = levelselect.characters
+		//NEW Xtraslot characters in level select
+		if (global.characters != 0)
+		{
+			if (global.characters == EXSlot3)
+			{
+				levelselect.characters = u8[0xffffE654] = 3
+			}
+			else if (global.characters == EXSlot2)
+			{
+				levelselect.characters = u8[0xffffE654] = 2
+			}
+			else if (global.characters == EXSlot1)
+			{
+				levelselect.characters = u8[0xffffE654] = 1
+			}
+		}
+	#if STANDALONE
+		// Handle Knuckles & Tails
+		useKnucklesAndTails = (global.characters == 4)
+		global.characters = min(global.characters, 3)
+	#endif
+
+		D0.u16 = u16[0x007d22 + levelselect.selection * 2]
+		//if (D0.u16 & 0x8000)
+		if (levelselect.selection == 0x22)
+		{
+			//Make the start button function like the B button in this case
+			//global.game_mode = 0x04
+			//playSound(0xad)
+
+			u32 backupA0 = A0
+			FadeOutScreenBlocking()
+			A0 = backupA0
+
+			// Do not fade out music in this case, Data Select music is meant to kept playing
+			Game.returnToMainMenu()
+			yieldExecution()
+			return true
+		}
+
+		if (D0.u16 != 0x5555)
+		{
+			// Start game
+			lives_counter = 3
+			global.sk_bluespheres = 0
+		#if STANDALONE
+			player.next_life_score = 5000
+			u32[0xffffffc4] = 5000
+		#endif
+
+			//if (D0.u16 == 0x4000 || D0.u16 == 0x4001)
+			if (levelselect.selection == 0x1f || levelselect.selection == 0x20)
+			{
+				// Start Blue Spheres
+				if (levelselect.selection == 0x1f)
+				{
+					// Blue Spheres from Sonic 3
+					if (global.lock_on_state != 0)
+					{
+						global.sk_bluespheres = 1
+					}
+				}
+				else if (levelselect.selection == 0x20)
+				{
+					// Blue Spheres from Sonic & Knuckles
+					global.sk_bluespheres = 1
+				}
+
+				// Start Blue Spheres
+				global.game_mode = 0x34
+
+			#if STANDALONE
+				if (control.pad1.state & CONTROL_A)
+				{
+					// This is needed to make the special stage selection (incl. 8th stage) work
+					//  -> You need to start a special stage form level select by pressing A + Start
+					//  -> Current sound test selection tells the game which stage to start
+					//  -> See "BlueSpheres.getNextOpenStageIndex()" function for more
+					debug_mode.unlocked = 1
+				}
+				
+			#else
+				// Tried to start a Sonic 3 stage in S&K ?
+				if (global.lock_on_state != 0)
+				{
+					if (global.zone_act != 0x0400 && global.zone_act < 0x0700)
+					{
+						global.zone_act = 0x0700
+						global.zone_act.apparent = 0x0700
+						checkpoint.zone_act = 0x0700
+						checkpoint.zone_act.apparent = 0x0700
+					}
+				}
+			#endif
+				return false
+			}
+			else
+			{
+				// Normal levels
+				if (fn007d6c())
+				{
+					return false
+				}
+			}
+		}
+	}
+	return true
+}
+
+//# translated(0x007d6c) end(0x007e62)
+function bool fn007d6c()
+{
+#if !STANDALONE
+	// Check if debug mode unlocked -- don't care in S3AIR
+	if (u16[0xffffffe2] == 0)
+	{
+		bool fail = false
+		if (global.characters == CHARS_KNUCKLES_ALONE)
+		{
+			fail = (D0.u16 == 0x0a00 || D0.u16 == 0x0c00 || D0.u16 == 0x1600 || D0.u16 == 0x1700)
+		}
+		else
+		{
+			if (D0.u16 == 0x0a01)
+			{
+				fail = true
+			}
+			else if (D0.u16 == 0x0c00)
+			{
+				fail = (global.characters == CHARS_TAILS_ALONE)
+			}
+		}
+
+		if (fail)
+		{
+			playSound(0xb2)
+			return false
+		}
+	}
+
+	if (global.lock_on_state != 0)
+	{
+		D1.u16 = D0.u16 & 0xff00
+		if (D1.u16 != 0x0400 && D1.u16 < 0x0700)
+		{
+			D0.u16 = 0x0700
+		}
+	}
+#endif
+
+	D0.u16 &= 0x3fff 
+	if (S3Complete_SoundTest_Order == 1)
+	{
+		//Original Design Order
+		if (levelselect.selection == 0x08)
+		{
+			//Flying Battery 1
+			D0.u16 = 0x0400
+		}
+		if (levelselect.selection == 0x09)
+		{
+			//Flying Battery 2
+			D0.u16 = 0x0401
+		}
+		if (levelselect.selection == 0x0a)
+		{
+			//IceCap 1
+			D0.u16 = 0x0500
+		}
+		if (levelselect.selection == 0x0b)
+		{
+			//IceCap 2
+			D0.u16 = 0x0501
+		}
+		if (levelselect.selection == 0x0c)
+		{
+			//Launch Base 1
+			D0.u16 = 0x0600
+		}
+		if (levelselect.selection == 0x0d)
+		{
+			//Launch Base 2
+			D0.u16 = 0x0601
+		}
+		if (levelselect.selection == 0x0e)
+		{
+			//Mushroom Hill 1
+			D0.u16 = 0x0700
+		}
+		if (levelselect.selection == 0x0f)
+		{
+			//Mushroom Hill 2
+			D0.u16 = 0x0701
+		}
+	}
+	if (levelselect.selection == 0x1a)
+	{
+		//Death Egg Boss
+		D0.u16 = 0x1700
+	}
+	if (levelselect.selection == 0x1b)
+	{
+		//The Doomsday
+		D0.u16 = 0x0c00
+	}
+	if (levelselect.selection == 0x1c)
+	{
+		//Gumball Machine (G)
+		D0.u16 = 0x1300
+		//Load the graphics for the springs and spikes
+		Nemesis.loadDataToVRAM(0x1927fe, 0x9280)
+	}
+	if (levelselect.selection == 0x1d)
+	{
+		//Glowing Spheres (M)
+		D0.u16 = 0x1400
+	}
+	if (levelselect.selection == 0x1e)
+	{
+		//Slot Machine (S)
+		D0.u16 = 0x1500
+	}
+	if (levelselect.selection == 0x21)
+	{
+		if (S3Complete_SoundTest_EndingCheat != 4)
+		{
+			//Emerald Shrine
+			D0.u16 = 0x1701
+		}
+		else
+		{
+			if (S3Complete_SoundTest_ExtraSelect == 2)
+			{
+				D0.u16 = 0x0d01
+			}
+			else if (S3Complete_SoundTest_ExtraSelect == 3)
+			{
+				D0.u16 = 0x0e00
+			}
+			else if (S3Complete_SoundTest_ExtraSelect == 4)
+			{
+				D0.u16 = 0x0f00
+			}
+			else if (S3Complete_SoundTest_ExtraSelect == 5)
+			{
+				D0.u16 = 0x1100
+				
+			}
+			else if (S3Complete_SoundTest_ExtraSelect == 6)
+			{
+				D0.u16 = 0x1000
+			}
+			else if (S3Complete_SoundTest_ExtraSelect == 7)
+			{
+				D0.u16 = 0x1200
+			}
+			else
+			{
+				D0.u16 = 0x1701
+			}
+		}
+	}
+	global.zone_act = D0.u16
+	global.zone_act.apparent = D0.u16
+	checkpoint.zone_act = D0.u16
+	checkpoint.zone_act.apparent = D0.u16
+	checkpoint.move_area.bottom = 0x1000
+	u16[0xfffffe62] = 0x1000
+	global.game_mode = 0x0c
+
+	if (S3Complete_SoundTest_LivesCheat == 4)
+	{
+		lives_counter = 99
+	}
+	else
+	{
+		lives_counter = 3
+	}
+	u8[0xfffffec6] = 3
+	ring_counter = 0
+	timer.alldata = 0
+	player.score = 0
+	u16[0xfffffed0] = 0
+	u32[0xfffffed2] = 0
+	u32[0xfffffed6] = 0
+	if (S3Complete_SoundTest_ContinuesCheat == 4)
+	{
+		continues_counter = 99
+	}
+	else
+	{
+		continues_counter = 0
+	}	
+	global.rolling_demo = 0
+	player.next_life_score = 5000
+	u32[0xffffffc4] = 5000
+
+	playSound(MUSIC_CTRL_FADEOUT)
+
+	u16[0xffffff8a] = 0
+	competition_mode.active = (global.zone >= 0x0e && global.zone < 0x13)
+	
+	//Handle characters for Competition Zones
+	if (competition_mode.active)
+	{
+		u8[0xffffef4e] = 1
+		//NEW Extra slot characters in competion mode
+		if (levelselect.characters == 0x03 && u8[0xffffE654] == 3) //Extra slot 3
+		{
+			u8[0xffffffea] = 5
+		}
+		else if (levelselect.characters == 0x02 && u8[0xffffE654] == 2) //Extra slot 2
+		{
+			u8[0xffffffea] = 4
+		}
+		else if (levelselect.characters == 0x01 && u8[0xffffE654] == 1) //Extra slot 1
+		{
+			u8[0xffffffea] = 3
+		}
+		else if (levelselect.characters == 0x02)
+		{
+			u8[0xffffffea] = 1
+		}
+		else if (levelselect.characters == 0x03 || levelselect.characters == 0x04)
+		{
+			u8[0xffffffea] = 2
+		}
+		else
+		{
+			u8[0xffffffea] = 0
+		}
+	}
+	return true
+}
+
+//# address-hook(0x007f62) end(0x008010)
+//# translated(0x008012) end(0x00803e)
+function void fn007f62()
+{
+	//Lava Reef Boss
+	if (levelselect.selection == 0x14)
+	{
+		A4 = 0xffff0000
+		A5 = 0x008040
+		A3 = A5 + 0x48
+		D0 = u32(u8[A3]) * 0x50 + u8[A3 + 1]
+		A1 = A4 + D0.s16
+	}
+	//Death Egg Boss
+	else if (levelselect.selection == 0x1a)
+	{
+		A4 = 0xffff0000
+		A5 = 0x008040
+		A3 = A5 + 0x60
+		D0 = u32(u8[A3]) * 0x50 + u8[A3 + 1]
+		A1 = A4 + D0.s16
+	}
+	//Bonus (G and M)
+	else if (levelselect.selection == 0x1c || levelselect.selection == 0x1d)
+	{
+		A4 = 0xffff0000 + 0x50
+		A5 = 0x008040
+		A3 = A5 + levelselect.selection * 4
+		D0 = u32(u8[A3]) * 0x50 + u8[A3 + 1]
+		A1 = A4 + D0.s16
+	}
+	//Bonus (S)
+	else if (levelselect.selection == 0x1e)
+	{
+		A4 = 0xffff0000
+		A5 = 0x008040
+		A3 = A5 + levelselect.selection * 4
+		D0 = u32(u8[A3]) * 0x50 + u8[A3 + 1]
+		A1 = A4 + D0.s16 + 0x60
+	}
+	//Sound Test
+	else if (levelselect.selection == 0x22)
+	{
+		A4 = 0xffff0000
+		A5 = 0x008040 + 0x86
+		A3 = A5
+		D0 = u32(u8[A3]) * 0x50 + u8[A3 + 1]
+		A1 = A4 + D0.s16
+	}
+	else
+	{
+		A4 = 0xffff0000
+		A5 = 0x008040
+		A3 = A5 + levelselect.selection * 4
+		D0 = u32(u8[A3]) * 0x50 + u8[A3 + 1]
+		A1 = A4 + D0.s16
+	}
+
+	if (levelselect.selection == 0x1c || levelselect.selection == 0x1d)
+	{
+		D1 = u32(u8[A3]) * 0x80 + u8[A3 + 1] + 0x80
+		D1.u16 += 0xc000 - 2
+		VDP.setupVRAMWrite(D1.u16) 
+	}
+	else if (levelselect.selection == 0x1e)
+	{
+		D1 = u32(u8[A3]) * 0x80 + u8[A3 + 1] + 0xa0
+		D1.u16 += 0xc000 - 2
+		VDP.setupVRAMWrite(D1.u16) 
+	}
+	else if (levelselect.selection == 0x21)
+	{
+		D1 = u32(u8[A3]) * 0x80 + u8[A3 + 1]
+		VDP.setupVRAMWrite(D1.u16)
+	}
+	else if (levelselect.selection == 0x22)
+	{
+		D1 = u32(u8[A3]) * 0x80 + u8[A3 + 1]
+		VDP.setupVRAMWrite(D1.u16)
+	}
+	else
+	{
+		D1 = u32(u8[A3]) * 0x80 + u8[A3 + 1]
+		D1.u16 += 0xc000 - 2
+		VDP.setupVRAMWrite(D1.u16)
+	}
+
+	for (u8 i = 0; i < 0x0f; ++i)
+	{
+		D0.u16 = u16[A1] + D3.u16
+		VDP.writeData16(D0.u16) 
+		A1 += 2
+	}
+	
+	//Lava Reef Boss act
+	if (levelselect.selection == 0x14)
+	{
+		A3 += 2
+		D0 = u8[A3] + 2
+		if (D0.u8 != 0)
+		{
+			D0 = u32(D0.u16) * 0x50 + u8[A3 + 1] + 2
+			A1 = A4 + D0.u16
+
+			D1 = 0xc1ca
+			VDP.setupVRAMWrite(D1.u16)
+
+			D0.u16 = u16[A1] + D3.u16
+			VDP.writeData16(D0.u16)
+			A1 += 2
+		}
+	}
+	//Death Egg Boss act
+	else if (levelselect.selection == 0x1a)
+	{
+		A3 += 2
+		D0 = u8[A3] + 2
+		if (D0.u8 != 0)
+		{
+			D0 = u32(D0.u16) * 0x50 + u8[A3 + 1] + 2
+			A1 = A4 + D0.u16
+
+			D1 = 0xc64a
+			VDP.setupVRAMWrite(D1.u16)
+
+			D0.u16 = u16[A1] + D3.u16
+			VDP.writeData16(D0.u16)
+			A1 += 2
+		}
+	}
+	//Bonus Stage (G and M)
+	else if (levelselect.selection == 0x1c || levelselect.selection == 0x1d)
+	{
+		A3 += 2
+		D0 = u8[A3]
+		if (D0.u8 != 0)
+		{
+			D0 = u32(D0.u16) * 0x50 + u8[A3 + 1] + 2
+			A1 = A4 + D0.u16
+
+			D1 = 0xc000 + u8[A3] * 0x80 + u8[A3 + 1] + 0x80
+			VDP.setupVRAMWrite(D1.u16)
+
+			D0.u16 = u16[A1] + D3.u16
+			VDP.writeData16(D0.u16)
+			A1 += 2
+		}
+	}
+	//Bonus Stage (S)
+	else if (levelselect.selection == 0x1e)
+	{
+		A3 += 2
+		D0 = u8[A3]
+		if (D0.u8 != 0)
+		{
+			D0 = u32(D0.u16) * 0x50 + u8[A3 + 1] + 2
+			A1 = A4 + D0.u16
+
+			D1 = 0xc000 + u8[A3] * 0x80 + u8[A3 + 1]
+			VDP.setupVRAMWrite(D1.u16)
+
+			D0.u16 = u16[A1] + D3.u16
+			VDP.writeData16(D0.u16)
+			A1 += 2
+		}
+		VDP.setupVRAMWrite(0xc8aa)
+		LevelSelect.writeHexDigit(0x0b, D3.u16)
+		LevelSelect.writeHexDigit(0x18, D3.u16)
+		LevelSelect.writeHexDigit(0x17, D3.u16)
+		LevelSelect.writeHexDigit(0x1e, D3.u16)
+		LevelSelect.writeHexDigit(0x1c, D3.u16)
+	}
+	//slot 21
+	else if (levelselect.selection == 0x1f || levelselect.selection == 0x20 || levelselect.selection == 0x21)
+	{
+		if (levelselect.selection == 0x21 && S3Complete_SoundTest_EndingCheat == 4)
+		{
+			VDP.setupVRAMWrite(0xcbaa)
+			LevelSelect.writeHexDigit(0x2f, D3.u16)
+			VDP.setupVRAMWrite(0xcbca)
+			LevelSelect.writeHexDigit(0x30, D3.u16)
+			
+			if (S3Complete_SoundTest_ExtraSelect == 1)
+			{
+				//Emerald Shrine
+				VDP.setupVRAMWrite(0xcbac)
+				
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				LevelSelect.writeHexDigit(0x16, D3.u16)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				LevelSelect.writeHexDigit(0x1b, D3.u16)
+				LevelSelect.writeHexDigit(0x0a, D3.u16)
+				LevelSelect.writeHexDigit(0x15, D3.u16)
+				LevelSelect.writeHexDigit(0x0d, D3.u16)
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x1c, D3.u16)
+				LevelSelect.writeHexDigit(0x11, D3.u16)
+				LevelSelect.writeHexDigit(0x1b, D3.u16)
+				LevelSelect.writeHexDigit(0x12, D3.u16)
+				LevelSelect.writeHexDigit(0x17, D3.u16)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+			}
+			if (S3Complete_SoundTest_ExtraSelect == 2)
+			{
+				//Ending
+				VDP.setupVRAMWrite(0xcbac)
+				VDP.writeData16(0x00)
+				VDP.writeData16(0x00)
+				VDP.writeData16(0x00)
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				LevelSelect.writeHexDigit(0x17, D3.u16)
+				LevelSelect.writeHexDigit(0x0d, D3.u16)
+				LevelSelect.writeHexDigit(0x12, D3.u16)
+				LevelSelect.writeHexDigit(0x17, D3.u16)
+				LevelSelect.writeHexDigit(0x10, D3.u16)
+				VDP.writeData16(0x00)
+				VDP.writeData16(0x00)
+				VDP.writeData16(0x00)
+				VDP.writeData16(0x00)
+				VDP.writeData16(0x00)
+			}
+			if (S3Complete_SoundTest_ExtraSelect == 3)
+			{
+				//Azure Lake
+				VDP.setupVRAMWrite(0xcbac)
+				VDP.writeData16(0x00)
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x0a, D3.u16)
+				LevelSelect.writeHexDigit(0x23, D3.u16)
+				LevelSelect.writeHexDigit(0x1e, D3.u16)
+				LevelSelect.writeHexDigit(0x1b, D3.u16)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x15, D3.u16)
+				LevelSelect.writeHexDigit(0x0a, D3.u16)
+				LevelSelect.writeHexDigit(0x14, D3.u16)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				VDP.writeData16(0x00)
+				VDP.writeData16(0x00)
+				VDP.writeData16(0x00)
+			}
+			if (S3Complete_SoundTest_ExtraSelect == 4)
+			{
+				//Balloon Park
+				VDP.setupVRAMWrite(0xcbac)
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x0b, D3.u16)
+				LevelSelect.writeHexDigit(0x0a, D3.u16)
+				LevelSelect.writeHexDigit(0x15, D3.u16)
+				LevelSelect.writeHexDigit(0x15, D3.u16)
+				LevelSelect.writeHexDigit(0x18, D3.u16)
+				LevelSelect.writeHexDigit(0x18, D3.u16)
+				LevelSelect.writeHexDigit(0x17, D3.u16)
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x19, D3.u16)
+				LevelSelect.writeHexDigit(0x0a, D3.u16)
+				LevelSelect.writeHexDigit(0x1b, D3.u16)
+				LevelSelect.writeHexDigit(0x14, D3.u16)
+				VDP.writeData16(0x00)
+				VDP.writeData16(0x00)
+			}
+			if (S3Complete_SoundTest_ExtraSelect == 5)
+			{
+				//Chrome Gadget
+				VDP.setupVRAMWrite(0xcbac)
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x0c, D3.u16)
+				LevelSelect.writeHexDigit(0x11, D3.u16)
+				LevelSelect.writeHexDigit(0x1b, D3.u16)
+				LevelSelect.writeHexDigit(0x18, D3.u16)
+				LevelSelect.writeHexDigit(0x16, D3.u16)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x10, D3.u16)
+				LevelSelect.writeHexDigit(0x0a, D3.u16)
+				LevelSelect.writeHexDigit(0x0d, D3.u16)
+				LevelSelect.writeHexDigit(0x10, D3.u16)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				LevelSelect.writeHexDigit(0x1d, D3.u16)
+				VDP.writeData16(0x00)
+			}
+			if (S3Complete_SoundTest_ExtraSelect == 6)
+			{
+				//Desert Palace
+				VDP.setupVRAMWrite(0xcbac)
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x0d, D3.u16)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				LevelSelect.writeHexDigit(0x1c, D3.u16)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				LevelSelect.writeHexDigit(0x1b, D3.u16)
+				LevelSelect.writeHexDigit(0x1d, D3.u16)
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x19, D3.u16)
+				LevelSelect.writeHexDigit(0x0a, D3.u16)
+				LevelSelect.writeHexDigit(0x15, D3.u16)
+				LevelSelect.writeHexDigit(0x0a, D3.u16)
+				LevelSelect.writeHexDigit(0x0c, D3.u16)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				VDP.writeData16(0x00)
+			}
+			if (S3Complete_SoundTest_ExtraSelect == 7)
+			{
+				//Endless Mine
+				VDP.setupVRAMWrite(0xcbac)
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				LevelSelect.writeHexDigit(0x17, D3.u16)
+				LevelSelect.writeHexDigit(0x0d, D3.u16)
+				LevelSelect.writeHexDigit(0x15, D3.u16)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				LevelSelect.writeHexDigit(0x1c, D3.u16)
+				LevelSelect.writeHexDigit(0x1c, D3.u16)
+				VDP.writeData16(0x00)
+				LevelSelect.writeHexDigit(0x16, D3.u16)
+				LevelSelect.writeHexDigit(0x12, D3.u16)
+				LevelSelect.writeHexDigit(0x17, D3.u16)
+				LevelSelect.writeHexDigit(0x0e, D3.u16)
+				VDP.writeData16(0x00)
+				VDP.writeData16(0x00)
+			}
+		}
+		else
+		{
+			VDP.setupVRAMWrite(0xcaaa)
+			LevelSelect.writeHexDigit(0x1c, D3.u16)
+			LevelSelect.writeHexDigit(0x19, D3.u16)
+			LevelSelect.writeHexDigit(0x0e, D3.u16)
+			LevelSelect.writeHexDigit(0x0c, D3.u16)
+			LevelSelect.writeHexDigit(0x12, D3.u16)
+			LevelSelect.writeHexDigit(0x0a, D3.u16)
+			LevelSelect.writeHexDigit(0x15, D3.u16)
+			VDP.setupVRAMWrite(0xcaba)
+			LevelSelect.writeHexDigit(0x1c, D3.u16)
+			LevelSelect.writeHexDigit(0x1d, D3.u16)
+			LevelSelect.writeHexDigit(0x0a, D3.u16)
+			LevelSelect.writeHexDigit(0x10, D3.u16)
+			LevelSelect.writeHexDigit(0x0e, D3.u16)
+			
+			if (levelselect.selection == 0x1f)
+			{
+				VDP.setupVRAMWrite(0xcaca)
+				LevelSelect.writeHexDigit(0x0a, D3.u16)
+			}
+			else if (levelselect.selection == 0x20)
+			{
+				VDP.setupVRAMWrite(0xcb4a)
+				LevelSelect.writeHexDigit(0x0b, D3.u16)
+			}
+			else
+			{
+				VDP.setupVRAMWrite(0xcbca)
+				if (S3Complete_SoundTest_EndingCheat == 4)
+				{
+					LevelSelect.writeHexDigit(0x0e, D3.u16)
+				}
+				else
+				{
+					LevelSelect.writeHexDigit(0x1c, D3.u16)
+				}
+			}
+		}
+	}
+	else if (levelselect.selection == 0x22)
+	{
+		//Number Select
+		A3 += 2
+		D0 = u8[A3]
+		if (D0.u8 != 0)
+		{
+			D0 = u32(D0.u16) * 0x50 + u8[A3 + 1] + 2
+			A1 = A4 + D0.u16
+
+			D1 = 0xc000 + u8[A3] * 0x80 + u8[A3 + 1]
+			VDP.setupVRAMWrite(D1.u16)
+
+			D0.u16 = u16[A1] + D3.u16
+			VDP.writeData16(D0.u16)
+			A1 += 2
+		}
+		VDP.setupVRAMWrite(0xccaa)
+		LevelSelect.writeHexDigit(0x1c, D3.u16)
+		LevelSelect.writeHexDigit(0x18, D3.u16)
+		LevelSelect.writeHexDigit(0x1e, D3.u16)
+		LevelSelect.writeHexDigit(0x17, D3.u16)
+		LevelSelect.writeHexDigit(0x0d, D3.u16)
+		VDP.setupVRAMWrite(0xccb6)
+		LevelSelect.writeHexDigit(0x1d, D3.u16)
+		LevelSelect.writeHexDigit(0x0e, D3.u16)
+		LevelSelect.writeHexDigit(0x1c, D3.u16)
+		LevelSelect.writeHexDigit(0x1d, D3.u16)
+		VDP.setupVRAMWrite(0xccc2)
+		LevelSelect.writeHexDigit(0x2f, D3.u16)
+		VDP.setupVRAMWrite(0xccca)
+		LevelSelect.writeHexDigit(0x30, D3.u16)
+	}
+	else
+	{
+		//Number Select
+		A3 += 2
+		D0 = u8[A3]
+		if (D0.u8 != 0)
+		{
+			D0 = u32(D0.u16) * 0x50 + u8[A3 + 1] + 2
+			A1 = A4 + D0.u16
+
+			D1 = 0xc000 + u8[A3] * 0x80 + u8[A3 + 1]
+			VDP.setupVRAMWrite(D1.u16)
+
+			D0.u16 = u16[A1] + D3.u16
+			VDP.writeData16(D0.u16)
+			A1 += 2
+		}
+	}
+
+	if (levelselect.selection != 0x22)
+	{
+		VDP.setupVRAMWrite(0xc7bc)
+		VDP.writeData16(0x6020)
+		VDP.writeData16(0x6046)
+	}
+	else
+	{
+		VDP.setupVRAMWrite(0xccc4)
+		LevelSelect.writeHexDigit(levelselect.soundtest >> 8,   D3.u16)
+		LevelSelect.writeHexDigit(levelselect.soundtest >> 4,   D3.u16)
+		LevelSelect.writeHexDigit(levelselect.soundtest & 0x0f, D3.u16)
+		VDP.setupVRAMWrite(0xc7bc)
+		VDP.writeData16(0x0020)
+		VDP.writeData16(0x0046)
+	}
+}
+
+function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
+{
+	if !(Mods.isModActive("Sonic 3 Complete Sound Test"))
+	{
+		if ((global.act == 1 && global.zone_act != 0x0001) || (global.zone_act == 0x0001 && camera.position.x.u16 >= 0x2000))
+		{
+			boss.remaining_hits = 8
+		}
+	}
+	return base.Standalone.onWriteToSpriteTable(px, py, renderQueue)
+}
+
+//# address-hook(0x007e64) end(0x007f1e)
+//# translated(0x007f46) end(0x007f60)
+function void fn007e64()
+{
+	bool skipPart = false
+	if ((control.pad1.pressed & (CONTROL_UP | CONTROL_DOWN)) == 0)
+	{
+		--u16[0xffffff80]
+		skipPart = (s16[0xffffff80] >= 0)
+	}
+
+	if (!skipPart)
+	{
+		u16[0xffffff80] = 11
+		if (control.pad1.state & CONTROL_UP)
+		{
+			--levelselect.selection
+			if (s16(levelselect.selection) < 0)
+				levelselect.selection = 0x22
+		}
+		if (control.pad1.state & CONTROL_DOWN)
+		{
+			++levelselect.selection
+			if (levelselect.selection > 0x22)
+				levelselect.selection = 0
+		}
+		return
+	}
+
+	if (levelselect.selection == 0x22)
+	{
+		// Sound test
+		if (control.pad1.pressed & CONTROL_LEFT)
+		{
+			--levelselect.soundtest
+			if (levelselect.soundtest > 0xff)
+			levelselect.soundtest = 0xff
+		}
+		if (control.pad1.pressed & CONTROL_RIGHT)
+		{
+			levelselect.soundtest = (levelselect.soundtest + 1) & 0xff
+		}
+		if (control.pad1.pressed & CONTROL_A)
+		{
+			levelselect.soundtest = (levelselect.soundtest + 0x10) & 0xff
+		}
+		if (control.pad1.pressed & CONTROL_START)
+		{
+			playSound(0xad)
+			changeMusicTempo(1)
+			Game.setUnderwaterAudioEffect(0x00)
+		}
+
+		if (control.pad1.pressed & CONTROL_C)
+		{	
+			if (control.pad1.state & CONTROL_A)
+			{
+				levelselect.soundtest = (levelselect.soundtest - 0x10) & 0xff
+			}
+			else
+			{
+				playMusic(levelselect.soundtest)
+				//Set music tempo to normal
+				if (levelselect.soundtest == 0xee)
+				{
+					changeMusicTempo(1)
+				}
+				//Speed up music
+				if (levelselect.soundtest == 0xef)
+				{
+					changeMusicTempo(8)
+				}
+				if (levelselect.soundtest == 0xe8)
+				{
+					Audio.playAudio("dropdash_charge", AudioContext.CONTEXT_SOUND)
+				}
+				if (levelselect.soundtest == 0xe9)
+				{
+					Audio.playAudio("dropdash_release", AudioContext.CONTEXT_SOUND)
+				}
+				if (levelselect.soundtest == 0xea)
+				{
+					Audio.playAudio("peelout_charge", AudioContext.CONTEXT_SOUND)
+				}
+				if (levelselect.soundtest == 0xeb)
+				{
+					Audio.playAudio("peelout_release", AudioContext.CONTEXT_SOUND)
+				}
+				if (levelselect.soundtest == 0xec)
+				{
+					Game.setUnderwaterAudioEffect(0x00)
+				}
+				if (levelselect.soundtest == 0xed)
+				{
+					Game.setUnderwaterAudioEffect(0xff)
+				}
+					
+				//Cheats!
+				//Chaos Emeralds
+				if (S3Complete_SoundTest_ChaosCheat == 0 && levelselect.soundtest == 0x02)
+				{
+					S3Complete_SoundTest_ChaosCheat = 1
+					return
+				}
+				if (S3Complete_SoundTest_ChaosCheat == 1 && levelselect.soundtest == 0x04)
+				{
+					S3Complete_SoundTest_ChaosCheat = 2
+					return
+				}
+				if (S3Complete_SoundTest_ChaosCheat == 1 && levelselect.soundtest != 0x04)
+				{
+					if (levelselect.soundtest == 0x02)
+					{
+						S3Complete_SoundTest_ChaosCheat = 1
+					}
+					else
+					{
+						S3Complete_SoundTest_ChaosCheat = 0
+					}
+					return
+				}
+				if (S3Complete_SoundTest_ChaosCheat == 2 && levelselect.soundtest == 0x05)
+				{
+					S3Complete_SoundTest_ChaosCheat = 3
+					return
+				}
+				if (S3Complete_SoundTest_ChaosCheat == 2 && levelselect.soundtest != 0x05)
+				{
+					if (levelselect.soundtest == 0x02)
+					{
+						S3Complete_SoundTest_ChaosCheat = 1
+					}
+					else
+					{
+						S3Complete_SoundTest_ChaosCheat = 0
+					}
+					return
+				}
+				if (S3Complete_SoundTest_ChaosCheat == 3 && levelselect.soundtest == 0x06)
+				{
+					//Give all the Chaos Emeralds
+					S3Complete_SoundTest_ChaosCheat = 0
+					global.chaos_emeralds = 7
+					global.super_emeralds = 0
+					global.traded_emeralds = 0
+					u8[0xFFFFFFB2] = 0x01
+					u8[0xFFFFFFB3] = 0x01
+					u8[0xFFFFFFB4] = 0x01
+					u8[0xFFFFFFB5] = 0x01
+					u8[0xFFFFFFB6] = 0x01
+					u8[0xFFFFFFB7] = 0x01
+					u8[0xFFFFFFB8] = 0x01
+					playSound(0x9f)
+					if (S3Complete_SoundTest_CheatMessage == 1)
+					{
+						System.writeDisplayLine("CHEAT ACTIVATED: 7 Chaos Emeralds")
+					}
+					return
+				}
+				if (S3Complete_SoundTest_ChaosCheat == 3 && levelselect.soundtest != 0x06)
+				{
+					if (levelselect.soundtest == 0x02)
+					{
+						S3Complete_SoundTest_ChaosCheat = 1
+					}
+					else
+					{
+						S3Complete_SoundTest_ChaosCheat = 0
+					}
+					return
+				}
+				//Super Emeralds
+				if (S3Complete_SoundTest_SuperCheat == 0 && levelselect.soundtest == 0x12)
+				{
+					S3Complete_SoundTest_SuperCheat = 1
+					return
+				}
+				if (S3Complete_SoundTest_SuperCheat == 1 && levelselect.soundtest == 0x14)
+				{
+					S3Complete_SoundTest_SuperCheat = 2
+					return
+				}
+				if (S3Complete_SoundTest_SuperCheat == 1 && levelselect.soundtest != 0x14)
+				{
+					if (levelselect.soundtest == 0x12)
+					{
+						S3Complete_SoundTest_SuperCheat = 1
+					}
+					else
+					{
+						S3Complete_SoundTest_SuperCheat = 0
+					}
+					return
+				}
+				if (S3Complete_SoundTest_SuperCheat == 2 && levelselect.soundtest == 0x15)
+				{
+					S3Complete_SoundTest_SuperCheat = 3
+					return
+				}
+				if (S3Complete_SoundTest_SuperCheat == 2 && levelselect.soundtest != 0x15)
+				{
+					if (levelselect.soundtest == 0x12)
+					{
+						S3Complete_SoundTest_SuperCheat = 1
+					}
+					else
+					{
+						S3Complete_SoundTest_SuperCheat = 0
+					}
+					return
+				}
+				if (S3Complete_SoundTest_SuperCheat == 3 && levelselect.soundtest == 0x16)
+				{
+					//Give all the Super Emeralds
+					S3Complete_SoundTest_SuperCheat = 0
+					global.chaos_emeralds = 7
+					global.super_emeralds = 7
+					global.traded_emeralds = 7
+					u8[0xFFFFFFB2] = 0x03
+					u8[0xFFFFFFB3] = 0x03
+					u8[0xFFFFFFB4] = 0x03
+					u8[0xFFFFFFB5] = 0x03
+					u8[0xFFFFFFB6] = 0x03
+					u8[0xFFFFFFB7] = 0x03
+					u8[0xFFFFFFB8] = 0x03
+					playSound(0x46)
+					if (S3Complete_SoundTest_CheatMessage == 1)
+					{
+						System.writeDisplayLine("CHEAT ACTIVATED: 7 Super Emeralds")
+					}
+					return
+				}
+				if (S3Complete_SoundTest_SuperCheat == 3 && levelselect.soundtest != 0x16)
+				{
+					if (levelselect.soundtest == 0x12)
+					{
+						S3Complete_SoundTest_SuperCheat = 1
+					}
+					else
+					{
+						S3Complete_SoundTest_SuperCheat = 0
+					}
+					return
+				}
+				//99 Lives
+				if (S3Complete_SoundTest_LivesCheat == 0 && levelselect.soundtest == 0x0a)
+				{
+					S3Complete_SoundTest_LivesCheat = 1
+					return
+				}
+				if (S3Complete_SoundTest_LivesCheat == 1 && levelselect.soundtest == 0x0c)
+				{
+					S3Complete_SoundTest_LivesCheat = 2
+					return
+				}
+				if (S3Complete_SoundTest_LivesCheat == 1 && levelselect.soundtest != 0x0c)
+				{
+					if (levelselect.soundtest == 0x0a)
+					{
+						S3Complete_SoundTest_LivesCheat = 1
+					}
+					else
+					{
+						S3Complete_SoundTest_LivesCheat = 0
+					}
+					return
+				}
+				if (S3Complete_SoundTest_LivesCheat == 2 && levelselect.soundtest == 0x0d)
+				{
+					S3Complete_SoundTest_LivesCheat = 3
+					return
+				}
+				if (S3Complete_SoundTest_LivesCheat == 2 && levelselect.soundtest != 0x0d)
+				{
+					if (levelselect.soundtest == 0x0a)
+					{
+						S3Complete_SoundTest_LivesCheat = 1
+					}
+					else
+					{
+						S3Complete_SoundTest_LivesCheat = 0
+					}
+					return
+				}
+				if (S3Complete_SoundTest_LivesCheat == 3 && levelselect.soundtest == 0x0e)
+				{
+					S3Complete_SoundTest_LivesCheat = 4
+					playSound(0x2a)
+					if (S3Complete_SoundTest_CheatMessage == 1)
+					{
+						System.writeDisplayLine("CHEAT ACTIVATED: 99 Lives")
+					}
+				}
+				if (S3Complete_SoundTest_LivesCheat == 3 && levelselect.soundtest != 0x0e)
+				{
+					if (levelselect.soundtest == 0x0a)
+					{
+						S3Complete_SoundTest_LivesCheat = 1
+					}
+					else
+					{
+						S3Complete_SoundTest_LivesCheat = 0
+					}
+					return
+				}
+				//99 Continues
+				if (S3Complete_SoundTest_ContinuesCheat == 0 && levelselect.soundtest == 0x1a)
+				{
+					S3Complete_SoundTest_ContinuesCheat = 1
+					return
+				}
+				if (S3Complete_SoundTest_ContinuesCheat == 1 && levelselect.soundtest == 0x1c)
+				{
+					S3Complete_SoundTest_ContinuesCheat = 2
+					return
+				}
+				if (S3Complete_SoundTest_ContinuesCheat == 1 && levelselect.soundtest != 0x1c)
+				{
+					if (levelselect.soundtest == 0x1a)
+					{
+						S3Complete_SoundTest_ContinuesCheat = 1
+					}
+					else
+					{
+						S3Complete_SoundTest_ContinuesCheat = 0
+					}
+					return
+				}
+				if (S3Complete_SoundTest_ContinuesCheat == 2 && levelselect.soundtest == 0x1d)
+				{
+					S3Complete_SoundTest_ContinuesCheat = 3
+					return
+				}
+				if (S3Complete_SoundTest_ContinuesCheat == 2 && levelselect.soundtest != 0x1d)
+				{
+					if (levelselect.soundtest == 0x1a)
+					{
+						S3Complete_SoundTest_ContinuesCheat = 1
+					}
+					else
+					{
+						S3Complete_SoundTest_ContinuesCheat = 0
+					}
+					return
+				}
+				if (S3Complete_SoundTest_ContinuesCheat == 3 && levelselect.soundtest == 0x1e)
+				{
+					S3Complete_SoundTest_ContinuesCheat = 4
+					playSound(0xAC)
+					if (S3Complete_SoundTest_CheatMessage == 1)
+					{
+						System.writeDisplayLine("CHEAT ACTIVATED: 99 Continues")
+					}
+					return
+				}
+				if (S3Complete_SoundTest_ContinuesCheat == 3 && levelselect.soundtest != 0x1e)
+				{
+					if (levelselect.soundtest == 0x1a)
+					{
+						S3Complete_SoundTest_ContinuesCheat = 1
+					}
+					else
+					{
+						S3Complete_SoundTest_ContinuesCheat = 0
+					}
+					return
+				}
+			}
+		}
+		if (control.pad1.pressed & CONTROL_B)
+		{
+			playMusic(0xe3)
+			changeMusicTempo(1)
+			Game.setUnderwaterAudioEffect(0x00)
+		}
+	}
+	else
+	{
+		//Navigation
+		if (levelselect.selection == 0x02)
+		{
+			if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
+			{
+				levelselect.selection = 0x15
+			}
+		}
+		else if (levelselect.selection == 0x08)
+		{
+			if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
+			{
+				levelselect.selection = 0x1b
+			}
+		}
+		else if (levelselect.selection == 0x0b)
+		{
+			if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
+			{
+				levelselect.selection = 0x1c
+			}
+		}
+		else if (levelselect.selection == 0x0f)
+		{
+			if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
+			{
+				levelselect.selection = 0x21
+			}
+		}
+		else if (levelselect.selection == 0x10 || levelselect.selection == 0x11)
+		{
+			if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
+			{
+				levelselect.selection = 0x22
+			}
+		}
+		else if (levelselect.selection == 0x14)
+		{
+			if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
+			{
+				levelselect.selection = 0x01
+			}
+		}
+		else if (levelselect.selection == 0x15)
+		{
+			if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
+			{
+				levelselect.selection = 0x02
+			}
+		}
+		else if (levelselect.selection == 0x1a)
+		{
+			if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
+			{
+				levelselect.selection = 0x07
+			}
+		}
+		else if (levelselect.selection == 0x1b)
+		{
+			if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
+			{
+				levelselect.selection = 0x08
+			}
+		}
+		else if (levelselect.selection == 0x1c || levelselect.selection == 0x1d)
+		{
+			if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
+			{
+				levelselect.selection = 0x0b
+			}
+		}
+		else if (levelselect.selection == 0x21)
+		{
+			if (S3Complete_SoundTest_EndingCheat == 4)
+			{
+				if (control.pad1.pressed & (CONTROL_LEFT))
+				{
+					S3Complete_SoundTest_ExtraSelect--
+					if (S3Complete_SoundTest_ExtraSelect < 1)
+					{
+						S3Complete_SoundTest_ExtraSelect = 7
+					}
+				}
+				if (control.pad1.pressed & (CONTROL_RIGHT))
+				{
+					S3Complete_SoundTest_ExtraSelect++
+					if (S3Complete_SoundTest_ExtraSelect > 7)
+					{
+						S3Complete_SoundTest_ExtraSelect = 1
+					}
+				}
+			}
+			else
+			{
+				if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
+				{
+					levelselect.selection = 0x0f
+				}
+			}
+		}
+		else
+		{
+			if (control.pad1.pressed & (CONTROL_LEFT | CONTROL_RIGHT))
+			{
+				levelselect.selection = u8[0x007f22 + levelselect.selection]
+			}
+		}
+
+		if (control.pad1.pressed & CONTROL_C)
+		{
+			//NEW determine what characters will be added to the levelselect
+			u8 maxCharacterSelection = WhatWillItBe(3)
+		#if STANDALONE
+			// Knuckles & Tails
+			if (Game.isSecretUnlocked(SECRET_KNUX_AND_TAILS))
+			{
+				//NEW
+				maxCharacterSelection = WhatWillItBe(4)
+			}
+		#endif
+
+			++levelselect.characters
+			if (levelselect.characters > maxCharacterSelection)
+				levelselect.characters = 0
+		}
+	}
+
+#if STANDALONE
+	if (control.pad1.pressed & CONTROL_B)
+	{
+		playSound(0xad)
+		changeMusicTempo(1)
+		Game.setUnderwaterAudioEffect(0x00)
+
+		u32 backupA0 = A0
+		FadeOutScreenBlocking()
+		A0 = backupA0
+
+		// Do not fade out music in this case, Data Select music is meant to kept playing
+		Game.returnToMainMenu()
+		yieldExecution()
+	}
+#endif
+}
+
+//# address-hook(0x00c890) end(0x00c95c)
+function void fn00c890()
+{
+	D0.u16 = level.framecounter & 0x0c
+	A2 = 0x200000 + u32[0x3a216a + D0.s16]
+	D7.u16 = 0xc21a
+	A0 = 0xffffe6ac
+	D6 = 7
+	while (D6.s16 >= 0)
+	{
+		A1 = (s8[A0] >= 0) ? A2 : 0x3a20de
+		D0.u16 = D7.u16
+		fn00c87e()
+
+		D1 = 9
+		D2 = 6
+		fn001506()
+
+		D7.u16 += 0x1a
+		A0 += 10
+		--D6.s16
+	}
+
+	A3 = 0xffffb128
+	D7.u16 = 0xca20
+	A0 = 0xffffe6ac
+	D3 = 7
+	while (D3.s16 >= 0)
+	{
+		D0.u16 = D7.u16 - 2
+		fn00c87e()
+
+		VDP.setupVRAMWrite(VDPHelper.getVRAMAddressFromWriteCode(D0))
+		VDP.writeData16(0x82b1)
+
+		if (s8[A0] >= 0)
+		{
+			if (u8[A3 + 0x3a] == u8[A3 + 0x37] && u8[A3 + 0x3b] != 0)
+			{
+				A1 = 0x00db36
+				D0.u16 = D7.u16
+				fn00d9f4()
+			}
+			else
+			{
+				A1 = 0x00db31
+				D0.u16 = D7.u16 - 2
+				fn00d9f4()
+
+				D0.u16 = u16[A3 + 0x36] * 2
+				D1 = u8[0x00c95e + D0.s16]
+				if (D1.s8 < 0)
+				{
+					D1.u16 = 0x8000
+				}
+				else
+				{
+					//Replace the 1 in the 10's digit with the unique one
+					D1.u16 += 0xa58e
+				}
+				VDP.writeData16(D1.u16)
+
+				D1 = 0xa562 + u8[0x00c95f + D0.s16]
+				VDP.writeData16(D1.u16)
+			}
+		}
+		else
+		{
+			A1 = 0x00db2b
+			D0.u16 = D7.u16
+			fn00d9f4()
+		}
+
+		D7.u16 += 0x1a
+		A0 += 10
+		A3 += 0x4a
+		--D3.s16
+	}
+
+	fn00c97a()
+}
+
+//NEW the function that's called to determine what characters will be added to the levelselect
+function u8 WhatWillItBe(u8 maxCharacterSelection)
+{
+	bool EXS1 = Renderer.hasCustomSprite("dataSel_slot1")
+	bool EXS2 = Renderer.hasCustomSprite("dataSel_slot2")
+	bool EXS3 = Renderer.hasCustomSprite("dataSel_slot3")
+
+	u8 MaxChar = maxCharacterSelection
+
+	if (EXS1 && EXS2 && EXS3)
+	{
+		maxCharacterSelection = MaxChar + 3
+		EXSlot3 = MaxChar + 3
+		EXSlot2 = MaxChar + 2
+		EXSlot1 = MaxChar + 1
+	}
+	else if (EXS2 && EXS3)
+	{
+		maxCharacterSelection = MaxChar + 2
+		EXSlot3 = MaxChar + 2
+		EXSlot2 = MaxChar + 1
+	}
+	else if (EXS1 && EXS3)
+	{
+		maxCharacterSelection = MaxChar + 2
+		EXSlot3 = MaxChar + 2
+		EXSlot1 = MaxChar + 1
+	}
+	else if (EXS1 && EXS2)
+	{
+		maxCharacterSelection = MaxChar + 2
+		EXSlot2 = MaxChar + 2
+		EXSlot1 = MaxChar + 1
+	}
+	else if (EXS1)
+	{
+		maxCharacterSelection = MaxChar + 1
+		EXSlot1 = MaxChar + 1
+	}
+	else if (EXS2)
+	{
+		maxCharacterSelection = MaxChar + 1
+		EXSlot2 = MaxChar + 1
+	}
+	else if (EXS3)
+	{
+		maxCharacterSelection = MaxChar + 1
+		EXSlot3 = MaxChar + 1
+	}
+	return maxCharacterSelection
+}

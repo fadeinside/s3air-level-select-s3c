@@ -1,0 +1,65 @@
+{
+	"s3complete_fonts_small_1":
+	{
+		"File": "s3complete_small.bin",
+		"RomInject": "0x0ca5e0"
+	},
+	
+	"s3complete_s1lselect":
+	{
+		"File": "lselectpal_s1.bin",
+	},
+	
+	"s3complete_s2lselect":
+	{
+		"File": "lselectpal_s2.bin",
+	},	
+
+	"s3complete_s3lselect":
+	{
+		"File": "lselectpal_s3.bin",
+	},	
+	
+	"s3complete_s1acclselect":
+	{
+		"File": "lselectpal_s1acc.bin",
+	},
+	
+	"s3complete_yamalselect":
+	{
+		"File": "lselectpal_yama.bin",
+	},
+	
+	"s3complete_s2acclselect":
+	{
+		"File": "lselectpal_s2acc.bin",
+	},
+	
+	"s3complete_dataselect_cleartext":
+	{
+		"File": "cleartext.bin",
+		"RomInject": "0xdb35"
+	},
+	
+	"s3complete_lselect_palette1":
+	{
+		"File": "lselectpal1.bin",
+		"RomInject": "0x0a8a7c"
+	},
+	
+	"s3complete_lselect_palette2":
+	{
+		"File": "lselectpal2.bin",
+		"RomInject": "0x0a8adc"
+	},
+	
+	"s3complete_lselect_palette_part1":
+	{
+		"File": "bgpalette_part1.bin",
+	},
+	
+	"s3complete_lselect_palette_s&k":
+	{
+		"File": "bgpalette_s&k.bin",
+	}
+}
