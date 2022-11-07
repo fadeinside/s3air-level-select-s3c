@@ -11,15 +11,6 @@ global u8 S3Complete_SoundTest_LivesCheat
 global u8 S3Complete_SoundTest_ContinuesCheat
 global u8 S3Complete_SoundTest_ExtraSelect
 
-//NEW Globals for Extra Slot Chars
-global u8 EXSlot1
-global u8 EXSlot2
-global u8 EXSlot3
-
-global string EXS1_LS_icon
-global string EXS2_LS_icon
-global string EXS3_LS_icon
-
 //-------------------------------------------------------//
 // Level Select Main Function                            //
 //-------------------------------------------------------//
@@ -31,22 +22,14 @@ function void LevelSelect()
 	changeMusicTempo(1)
 	Game.setUnderwaterAudioEffect(0x00)
 	S3Complete_SoundTest_ExtraSelect = 1
-	//Load player icons
-	if (levelselect.characters != 0)
+	//NEW If extra slots are detected, load their icons
+#if EXTRA_CHARACTERS_UNLIMITED
+	if (levelselect.xtrachar || global.xtrachar > 0)
 	{
-		if (levelselect.characters == EXSlot3)
-		{
-			Renderer.drawCustomSprite(stringformat("level_select_S3C_%s", EXS3_LS_icon), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
-		}
-		else if (levelselect.characters == EXSlot2)
-		{
-			Renderer.drawCustomSprite(stringformat("level_select_S3C_%s", EXS2_LS_icon), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
-		}
-		else if (levelselect.characters == EXSlot1)
-		{
-			Renderer.drawCustomSprite(stringformat("level_select_S3C_%s", EXS1_LS_icon), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
-		}
+		u64 key = RenderExtraCharIcon(global.xtrachar)
+		Renderer.drawCustomSprite(key, getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
 	}
+#endif
 	if (levelselect.characters <= 1)
 	{
 		if (S3Complete_SoundTest_SpriteStyle == 0)
@@ -136,29 +119,16 @@ function void LevelSelect()
 			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_TailsOG", getScreenExtend() + 270, 115, 0x00, 0, 0x2000)
 		}
 	}
-	if (levelselect.characters > 4)
+
+	//NEW If extra slots are detected, load their icons
+#if EXTRA_CHARACTERS_UNLIMITED
+	if (levelselect.xtrachar || global.xtrachar > 0)
 	{
-		//NEW If extra slots are detected, load their icons
-		u64 key = 0
-		if (levelselect.characters == EXSlot3)
-		{
-			key = stringformat("level_select_S3C_%s", EXS3_LS_icon)
-			Renderer.drawCustomSprite((Renderer.hasCustomSprite(key) ? key : "S3Complete_LevelSelectIcon_Invalid"), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
-		}
-		else if (levelselect.characters == EXSlot2)
-		{
-			key = stringformat("level_select_S3C_%s", EXS2_LS_icon)
-			Renderer.drawCustomSprite((Renderer.hasCustomSprite(key) ? key : "S3Complete_LevelSelectIcon_Invalid"), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
-		}
-		else if (levelselect.characters == EXSlot1)
-		{
-			key = stringformat("level_select_S3C_%s", EXS1_LS_icon)
-			Renderer.drawCustomSprite((Renderer.hasCustomSprite(key) ? key : "S3Complete_LevelSelectIcon_Invalid"), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
-		}
-		else
-			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Invalid", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		u64 key = RenderExtraCharIcon(global.xtrachar)
+		Renderer.drawCustomSprite(key, getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
 	}
-	
+#endif
+
 	if (S3Complete_SoundTest_BG < 2)
 	{
 		//Draw S3 Data Select BG
@@ -819,28 +789,16 @@ function bool LevelSelect.innerUpdate()
 			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_ManiaTails", getScreenExtend() + 270, 115, 0x00, 0, 0x2000)
 		}
 	}
-	if (levelselect.characters > 4)
+
+	//NEW If extra slots are detected, load their icons
+#if EXTRA_CHARACTERS_UNLIMITED
+	if (levelselect.xtrachar || global.xtrachar > 0)
 	{
-		//NEW If extra slots are detected, load their icons
-		u64 key = 0
-		if (levelselect.characters == EXSlot3)
-		{
-			key = stringformat("level_select_S3C_%s", EXS3_LS_icon)
-			Renderer.drawCustomSprite((Renderer.hasCustomSprite(key) ? key : "S3Complete_LevelSelectIcon_Invalid"), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
-		}
-		else if (levelselect.characters == EXSlot2)
-		{
-			key = stringformat("level_select_S3C_%s", EXS2_LS_icon)
-			Renderer.drawCustomSprite((Renderer.hasCustomSprite(key) ? key : "S3Complete_LevelSelectIcon_Invalid"), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
-		}
-		else if (levelselect.characters == EXSlot1)
-		{
-			key = stringformat("level_select_S3C_%s", EXS1_LS_icon)
-			Renderer.drawCustomSprite((Renderer.hasCustomSprite(key) ? key : "S3Complete_LevelSelectIcon_Invalid"), getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
-		}
-		else
-			Renderer.drawCustomSprite("S3Complete_LevelSelectIcon_Invalid", getScreenExtend() + 255, 115, 0x00, 0, 0x2000)
+		u64 key = RenderExtraCharIcon(global.xtrachar)
+		Renderer.drawCustomSprite(key, getScreenExtend() + 255, 115, 0x00, 0, 0xe000)
 	}
+#endif
+
 	RenderSprites()
 
 	//Color Update
@@ -868,22 +826,6 @@ function bool LevelSelect.innerUpdate()
 		}
 
 		global.characters = levelselect.characters
-		//NEW Xtraslot characters in level select
-		if (global.characters != 0)
-		{
-			if (global.characters == EXSlot3)
-			{
-				levelselect.characters = u8[0xffffE654] = 3
-			}
-			else if (global.characters == EXSlot2)
-			{
-				levelselect.characters = u8[0xffffE654] = 2
-			}
-			else if (global.characters == EXSlot1)
-			{
-				levelselect.characters = u8[0xffffE654] = 1
-			}
-		}
 	#if STANDALONE
 		// Handle Knuckles & Tails
 		useKnucklesAndTails = (global.characters == 4)
@@ -1175,19 +1117,18 @@ function bool fn007d6c()
 	{
 		u8[0xffffef4e] = 1
 		//NEW Extra slot characters in competion mode
-		if (levelselect.characters == 0x03 && u8[0xffffE654] == 3) //Extra slot 3
-		{
-			u8[0xffffffea] = 5
-		}
-		else if (levelselect.characters == 0x02 && u8[0xffffE654] == 2) //Extra slot 2
-		{
-			u8[0xffffffea] = 4
-		}
-		else if (levelselect.characters == 0x01 && u8[0xffffE654] == 1) //Extra slot 1
+	#if EXTRA_CHARACTERS_UNLIMITED
+		if (global.xtrachar > 0)
 		{
 			u8[0xffffffea] = 3
+			u8[0xffffffeb] = 0
+			u8[0xffffe655] = global.xtrachar
+			u8[0xffffe656] = 0
+			global.xtrachar = 0
 		}
-		else if (levelselect.characters == 0x02)
+		else
+	#endif
+		if (levelselect.characters == 0x02)
 		{
 			u8[0xffffffea] = 1
 		}
@@ -2136,22 +2077,53 @@ function void fn007e64()
 			}
 		}
 
+		u8 maxCharacterSelection = Game.isSecretUnlocked(SECRET_KNUX_AND_TAILS) ? 0x04 : 0x03
+
 		if (control.pad1.pressed & CONTROL_C)
 		{
-			//NEW determine what characters will be added to the levelselect
-			u8 maxCharacterSelection = WhatWillItBe(3)
-		#if STANDALONE
-			// Knuckles & Tails
-			if (Game.isSecretUnlocked(SECRET_KNUX_AND_TAILS))
+		#if EXTRA_CHARACTERS_UNLIMITED
+			if (levelselect.characters < maxCharacterSelection && !levelselect.xtrachar)
 			{
-				//NEW
-				maxCharacterSelection = WhatWillItBe(4)
+				++levelselect.characters
+				if (levelselect.characters > maxCharacterSelection)
+					levelselect.characters = 0x00
+			}
+			else
+			{
+				levelselect.xtrachar = true
+			}
+			
+			if (levelselect.xtrachar)
+			{
+				if (global.xtrachar < ExtraChar.getHighestSlot())
+				{
+					for (u8 A = 0x01; A <= 0xff; ++A)
+					{
+						if (Renderer.hasCustomSprite(stringformat("dataSel_slot%d", A)) && A > global.xtrachar)
+						{
+							global.xtrachar = A
+							levelselect.characters = CHARS_SONIC_ALONE
+							ExtraChar.startupWithExtraChar()
+							break
+						}
+					}
+				}
+				// If the extra variable is equal to the highest slot, then reset the variables and go to the next default slot
+				else
+				{
+					global.xtrachar = 0x00
+					levelselect.characters = 0x00
+					levelselect.xtrachar = false
+				}
+			}
+		#else
+			if (levelselect.characters < maxCharacterSelection)
+			{
+				++levelselect.characters
+				if (levelselect.characters > maxCharacterSelection)
+					levelselect.characters = 0x00
 			}
 		#endif
-
-			++levelselect.characters
-			if (levelselect.characters > maxCharacterSelection)
-				levelselect.characters = 0
 		}
 	}
 
@@ -2255,54 +2227,13 @@ function void fn00c890()
 	fn00c97a()
 }
 
-//NEW the function that's called to determine what characters will be added to the levelselect
-function u8 WhatWillItBe(u8 maxCharacterSelection)
+// NEW function returns the icon of the Extra character
+function string RenderExtraCharIcon(u8 xtrachar)
 {
-	bool EXS1 = Renderer.hasCustomSprite("dataSel_slot1")
-	bool EXS2 = Renderer.hasCustomSprite("dataSel_slot2")
-	bool EXS3 = Renderer.hasCustomSprite("dataSel_slot3")
+	string key = stringformat("level_select_S3C_%d", xtrachar)
 
-	u8 MaxChar = maxCharacterSelection
+	if (Renderer.hasCustomSprite(key))
+		return key
 
-	if (EXS1 && EXS2 && EXS3)
-	{
-		maxCharacterSelection = MaxChar + 3
-		EXSlot3 = MaxChar + 3
-		EXSlot2 = MaxChar + 2
-		EXSlot1 = MaxChar + 1
-	}
-	else if (EXS2 && EXS3)
-	{
-		maxCharacterSelection = MaxChar + 2
-		EXSlot3 = MaxChar + 2
-		EXSlot2 = MaxChar + 1
-	}
-	else if (EXS1 && EXS3)
-	{
-		maxCharacterSelection = MaxChar + 2
-		EXSlot3 = MaxChar + 2
-		EXSlot1 = MaxChar + 1
-	}
-	else if (EXS1 && EXS2)
-	{
-		maxCharacterSelection = MaxChar + 2
-		EXSlot2 = MaxChar + 2
-		EXSlot1 = MaxChar + 1
-	}
-	else if (EXS1)
-	{
-		maxCharacterSelection = MaxChar + 1
-		EXSlot1 = MaxChar + 1
-	}
-	else if (EXS2)
-	{
-		maxCharacterSelection = MaxChar + 1
-		EXSlot2 = MaxChar + 1
-	}
-	else if (EXS3)
-	{
-		maxCharacterSelection = MaxChar + 1
-		EXSlot3 = MaxChar + 1
-	}
-	return maxCharacterSelection
+	return "S3Complete_LevelSelectIcon_Invalid"
 }
